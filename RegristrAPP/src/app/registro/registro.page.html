@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Registro</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container" style="text-align: center; padding-top: 20px;">
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input [(ngModel)]="nombre" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Apellido</ion-label>
+      <ion-input [(ngModel)]="apellido" type="text"></ion-input>
+    </ion-item>
+
+    <!-- Selección de escuela -->
+    <ion-item>
+      <ion-label position="stacked">Escuela</ion-label>
+      <ion-select [(ngModel)]="escuela" (ionChange)="onEscuelaChange()">
+        <ion-select-option value="Escuela de Salud">Escuela de Salud</ion-select-option>
+        <ion-select-option value="Escuela de Ingeniería y Recursos Naturales">Escuela de Ingeniería y Recursos Naturales</ion-select-option>
+        <ion-select-option value="Escuela de Informática y Telecomunicaciones">Escuela de Informática y Telecomunicaciones</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Selección de carrera (se muestra solo cuando se ha seleccionado una escuela) -->
+    <ion-item *ngIf="escuela">
+      <ion-label position="stacked">Carrera</ion-label>
+      <ion-select [(ngModel)]="carrera">
+        <!-- Opciones de carrera mostradas dinámicamente según la elección de la escuela -->
+        <ion-select-option *ngFor="let option of opcionesCarrera" [value]="option">{{ option }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Campo de RUT -->
+    <ion-item>
+      <ion-label position="stacked">RUT</ion-label>
+      <ion-input [(ngModel)]="rut" type="text"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" (click)="register()">Registrarse</ion-button>
+  </div>
+</ion-content>
